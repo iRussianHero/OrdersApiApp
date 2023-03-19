@@ -21,9 +21,11 @@ namespace OrderApiApp.Service.ClientService
             return client;
         }
 
-        public Task<Client> DeleteAsync(int id)
+        public async Task<Client> DeleteAsync(Client client)
         {
-            throw new NotImplementedException();
+            db.Client.Remove(client);
+            await db.SaveChangesAsync();
+            return client;
         }
 
         public Task<List<Client>> GetAllAsync()
@@ -31,14 +33,22 @@ namespace OrderApiApp.Service.ClientService
             return db.Client.ToListAsync();
         }
 
-        public Task<Client> GetAsync(int id)
+        public async Task<Client> GetAsync(Client client)
         {
-            throw new NotImplementedException();
+            List<Client> allClients = new List<Client>();
+            allClients = await db.Client.ToListAsync();
+            foreach (Client thisClient in allClients)
+            {
+                if (client.Id == thisClient.Id) return thisClient;
+            }
+            return null;
         }
 
-        public Task<Client> UpdateAsync(Client client)
+        public async Task<Client> UpdateAsync(Client client)
         {
-            throw new NotImplementedException();
+            db.Client.Update(client);
+            await db.SaveChangesAsync();
+            return client;
         }
     }
 }
