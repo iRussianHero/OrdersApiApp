@@ -7,6 +7,7 @@
 
         public Client()
         {
+            Id = default;
             Name = "";
         }
     }
