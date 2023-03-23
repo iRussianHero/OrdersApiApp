@@ -36,13 +36,6 @@ namespace OrderApiApp.Service.ClientService
         public async Task<Client> GetAsync(Client client)
         {
             return await db.Client.FirstOrDefaultAsync(p => p.Id == client.Id);
-/*            List<Client> allClients = new List<Client>();
-            allClients = await db.Client.ToListAsync();
-            foreach (Client thisClient in allClients)
-            {
-                if (client.Id == thisClient.Id) return thisClient;
-            }
-            return null;*/
         }
 
         public async Task<Client> UpdateAsync(Client client)
