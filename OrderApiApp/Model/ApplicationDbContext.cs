@@ -6,6 +6,9 @@ namespace OrderApiApp.Model
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Client> Client { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Receipt> Receipt { get; set; }
+        public DbSet<Product> Product { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()

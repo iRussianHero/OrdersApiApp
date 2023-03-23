@@ -1,4 +1,5 @@
-﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using System.Xml.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace OrderApiApp.Model.Entity
 {
@@ -13,5 +14,13 @@ namespace OrderApiApp.Model.Entity
 
         public int ClientId { get; set; }
         public Client Client { get; set; }
+
+
+        public Order()
+        {
+            Id = default;
+            Description = "";
+            ClientId = default;
+        }
     }
 }

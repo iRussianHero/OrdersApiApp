@@ -12,5 +12,14 @@
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
+
+
+        public Receipt()
+        {
+            Id = default;
+            Quantity = 0;
+            OrderId = default;
+            ProductId = default;
+        }
     }
 }

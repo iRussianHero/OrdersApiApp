@@ -11,5 +11,12 @@
         public List<Receipt> Receipt { get; set; }
 
 
+        public Product()
+        {
+            Id = default;
+            Name = "";
+            Article = 0;
+            Cost = 0;
+        }
     }
 }
