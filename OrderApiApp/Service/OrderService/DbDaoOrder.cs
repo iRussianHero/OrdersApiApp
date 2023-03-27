@@ -24,13 +24,17 @@ namespace OrderApiApp.Service.OrderService
 
         public async Task<Order> DeleteAsync(Order order)
         {
-            db.Order.Remove(order);
-            await db.SaveChangesAsync();
+            if (await db.Order.FirstOrDefaultAsync() != null)
+            {
+                db.Order.Remove(order);
+                await db.SaveChangesAsync();
+            }
             return order;
         }
 
         public Task<List<Order>> GetAllAsync()
         {
+            db.Order.Load();
             return db.Order.ToListAsync();
         }
 
@@ -41,8 +45,11 @@ namespace OrderApiApp.Service.OrderService
 
         public async Task<Order> UpdateAsync(Order order)
         {
-            db.Order.Update(order);
-            await db.SaveChangesAsync();
+            if (await db.Order.FirstOrDefaultAsync() != null)
+            {
+                db.Order.Update(order);
+                await db.SaveChangesAsync();
+            }
             return order;
         }
     }
