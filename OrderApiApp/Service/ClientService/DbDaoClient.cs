@@ -23,13 +23,17 @@ namespace OrderApiApp.Service.ClientService
 
         public async Task<Client> DeleteAsync(Client client)
         {
-            db.Client.Remove(client);
-            await db.SaveChangesAsync();
+            if (await db.Client.FirstOrDefaultAsync() != null)
+            {
+                db.Client.Remove(client);
+                await db.SaveChangesAsync();
+            }
             return client;
         }
 
         public Task<List<Client>> GetAllAsync()
         {
+            db.Client.Load();
             return db.Client.ToListAsync();
         }
 
@@ -40,8 +44,11 @@ namespace OrderApiApp.Service.ClientService
 
         public async Task<Client> UpdateAsync(Client client)
         {
-            db.Client.Update(client);
-            await db.SaveChangesAsync();
+            if (await db.Client.FirstOrDefaultAsync() != null) {
+                db.Client.Update(client);
+                await db.SaveChangesAsync();
+                return client;
+            }
             return client;
         }
     }

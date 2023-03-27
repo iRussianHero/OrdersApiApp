@@ -1,32 +1,49 @@
-﻿using OrderApiApp.Model.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderApiApp.Model;
+using OrderApiApp.Model.Entity;
 
 namespace OrderApiApp.Service.OrderService
 {
     public class DbDaoOrder : IDaoOrder
     {
-        public Task<Order> AddAsync(Order order)
+        private static List<Order> _orders = new List<Order>();
+        private static int currentId = 1;
+        private ApplicationDbContext db;
+
+        public DbDaoOrder(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            this.db = db;
         }
 
-        public Task<Order> DeleteAsync(Order order)
+        public async Task<Order> AddAsync(Order order)
         {
-            throw new NotImplementedException();
+            await db.AddAsync(order);
+            await db.SaveChangesAsync();
+            return order;
+        }
+
+        public async Task<Order> DeleteAsync(Order order)
+        {
+            db.Order.Remove(order);
+            await db.SaveChangesAsync();
+            return order;
         }
 
         public Task<List<Order>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return db.Order.ToListAsync();
         }
 
-        public Task<Order> GetAsync(Order order)
+        public async Task<Order> GetAsync(Order order)
         {
-            throw new NotImplementedException();
+            return await db.Order.FirstOrDefaultAsync(p => p.Id == order.Id);
         }
 
-        public Task<Order> UpdateAsync(Order order)
+        public async Task<Order> UpdateAsync(Order order)
         {
-            throw new NotImplementedException();
+            db.Order.Update(order);
+            await db.SaveChangesAsync();
+            return order;
         }
     }
 }
