@@ -13,7 +13,7 @@ namespace OrderApiApp.Model.Entity
 
 
         public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public Client? Client { get; set; }
 
 
         public Order()
@@ -21,6 +21,11 @@ namespace OrderApiApp.Model.Entity
             Id = default;
             Description = "";
             ClientId = default;
+        }
+
+        public override string ToString()
+        {
+            return $"{Id} - {Description} - {ClientId}";
         }
     }
 }

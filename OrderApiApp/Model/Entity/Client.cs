@@ -1,4 +1,6 @@
-﻿namespace OrderApiApp.Model.Entity
+﻿using System.Text.Json.Serialization;
+
+namespace OrderApiApp.Model.Entity
 {
     public class Client
     {
@@ -6,13 +8,24 @@
         public string Name { get; set; }
 
 
-        public List<Order> Order { get; set; }
-
+        [JsonIgnore]
+        public ICollection<Order>? Orders { get; set; }
 
         public Client()
         {
             Id = default;
             Name = "";
+        }
+
+        public Client (int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public override string ToString()
+        {
+            return $"{Id} - {Name}";
         }
     }
 }
