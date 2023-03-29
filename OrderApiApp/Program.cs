@@ -96,4 +96,30 @@ app.MapPost("/product/choose", async (Product product, IDaoProduct daoProduct) =
 });
 
 
+app.MapGet("/receipt/all", async (IDaoReceipt daoReceipt) =>
+{
+    return await daoReceipt.GetAllAsync();
+});
+
+app.MapPost("/receipt/add", async (Receipt receipt, IDaoReceipt daoReceipt) =>
+{
+    return await daoReceipt.AddAsync(receipt);
+});
+
+app.MapPost("/receipt/delete", async (Receipt receipt, IDaoReceipt daoReceipt) =>
+{
+    return await daoReceipt.DeleteAsync(receipt);
+});
+
+app.MapPost("/receipt/update", async (Receipt receipt, IDaoReceipt daoReceipt) =>
+{
+    return await daoReceipt.UpdateAsync(receipt);
+});
+
+app.MapPost("/receipt/choose", async (Receipt receipt, IDaoReceipt daoReceipt) =>
+{
+    return await daoReceipt.GetAsync(receipt);
+});
+
+
 app.Run();

@@ -6,8 +6,6 @@ namespace OrderApiApp.Service.OrderService
 {
     public class DbDaoOrder : IDaoOrder
     {
-        private static List<Order> _orders = new List<Order>();
-        private static int currentId = 1;
         private ApplicationDbContext db;
 
         public DbDaoOrder(ApplicationDbContext db)

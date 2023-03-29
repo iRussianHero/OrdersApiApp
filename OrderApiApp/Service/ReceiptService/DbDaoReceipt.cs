@@ -1,32 +1,53 @@
-﻿using OrderApiApp.Model.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderApiApp.Model;
+using OrderApiApp.Model.Entity;
 
 namespace OrderApiApp.Service.ReceiptService
 {
     public class DbDaoReceipt : IDaoReceipt
     {
-        public Task<Receipt> AddAsync(Receipt receipt)
+        private ApplicationDbContext db;
+
+        public DbDaoReceipt(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            this.db = db;
         }
 
-        public Task<Receipt> DeleteAsync(Receipt receipt)
+        public async Task<Receipt> AddAsync(Receipt receipt)
         {
-            throw new NotImplementedException();
+            await db.AddAsync(receipt);
+            await db.SaveChangesAsync();
+            return receipt;
+        }
+
+        public async Task<Receipt> DeleteAsync(Receipt receipt)
+        {
+            if (await db.Receipt.FirstOrDefaultAsync() != null)
+            {
+                db.Receipt.Remove(receipt);
+                await db.SaveChangesAsync();
+            }
+            return receipt;
         }
 
         public Task<List<Receipt>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return db.Receipt.ToListAsync();
         }
 
-        public Task<Receipt> GetAsync(Receipt receipt)
+        public async Task<Receipt> GetAsync(Receipt receipt)
         {
-            throw new NotImplementedException();
+            return await db.Receipt.FirstOrDefaultAsync(p => p.Id == receipt.Id);
         }
 
-        public Task<Receipt> UpdateAsync(Receipt receipt)
+        public async Task<Receipt> UpdateAsync(Receipt receipt)
         {
-            throw new NotImplementedException();
+            if (await db.Receipt.FirstOrDefaultAsync() != null)
+            {
+                db.Receipt.Update(receipt);
+                await db.SaveChangesAsync();
+            }
+            return receipt;
         }
     }
 }
