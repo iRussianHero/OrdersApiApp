@@ -34,7 +34,7 @@ namespace OrderApiApp.Service.OrderService
 
         public Task<List<Order>> GetAllAsync()
         {
-            db.Order.Load();
+            //db.Client.Load();
             return db.Order.ToListAsync();
         }
 

@@ -8,8 +8,8 @@ namespace OrderApiApp.Model.Entity
         public string Name { get; set; }
 
 
-        [JsonIgnore]
-        public ICollection<Order>? Orders { get; set; }
+        //[JsonIgnore]
+        //public ICollection<Order>? Orders { get; set; }
 
         public Client()
         {

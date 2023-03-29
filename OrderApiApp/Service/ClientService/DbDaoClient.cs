@@ -33,7 +33,7 @@ namespace OrderApiApp.Service.ClientService
 
         public Task<List<Client>> GetAllAsync()
         {
-            db.Client.Load();
+            //db.Order.Load();
             return db.Client.ToListAsync();
         }
 

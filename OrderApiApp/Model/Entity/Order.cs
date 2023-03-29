@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
+using System.Xml.Linq;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace OrderApiApp.Model.Entity
@@ -9,23 +10,24 @@ namespace OrderApiApp.Model.Entity
         public string Description { get; set; }
 
 
-        public List<Receipt> Receipt { get; set; }
+        //public List<Receipt> Receipt { get; set; } = new();
 
 
-        //public int ClientId { get; set; }
-        public Client? Client { get; set; }
+        public int ClientId { get; set; }
+        //[JsonIgnore]
+        //public Client? Client { get; set; }
 
 
         public Order()
         {
             Id = default;
             Description = "";
-            //ClientId = default;
+            ClientId = default;
         }
 
         public override string ToString()
         {
-            return $"{Id} - {Description} - {Client.Id}";
+            return $"{Id} - {Description} - {ClientId}";
         }
     }
 }
