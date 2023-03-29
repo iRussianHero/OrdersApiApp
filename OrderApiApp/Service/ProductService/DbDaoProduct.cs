@@ -1,32 +1,53 @@
-﻿using OrderApiApp.Model.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderApiApp.Model;
+using OrderApiApp.Model.Entity;
 
 namespace OrderApiApp.Service.ProductService
 {
     public class DbDaoProduct : IDaoProduct
     {
-        public Task<Product> AddAsync(Product product)
+        private ApplicationDbContext db;
+
+        public DbDaoProduct(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            this.db = db;
         }
 
-        public Task<Product> DeleteAsync(Product product)
+        public async Task<Product> AddAsync(Product product)
         {
-            throw new NotImplementedException();
+            await db.AddAsync(product);
+            await db.SaveChangesAsync();
+            return product;
+        }
+
+        public async Task<Product> DeleteAsync(Product product)
+        {
+            if (await db.Product.FirstOrDefaultAsync() != null)
+            {
+                db.Product.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return product;
         }
 
         public Task<List<Product>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return db.Product.ToListAsync();
         }
 
-        public Task<Product> GetAsync(Product product)
+        public async Task<Product> GetAsync(Product product)
         {
-            throw new NotImplementedException();
+            return await db.Product.FirstOrDefaultAsync(p => p.Id == product.Id);
         }
 
-        public Task<Product> UpdateAsync(Product product)
+        public async Task<Product> UpdateAsync(Product product)
         {
-            throw new NotImplementedException();
+            if (await db.Product.FirstOrDefaultAsync() != null)
+            {
+                db.Product.Update(product);
+                await db.SaveChangesAsync();
+            }
+            return product;
         }
     }
 }

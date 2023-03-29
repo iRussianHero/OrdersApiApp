@@ -69,4 +69,31 @@ app.MapPost("/order/choose", async (Order order, IDaoOrder daoOrder) =>
     return await daoOrder.GetAsync(order);
 });
 
+
+app.MapGet("/product/all", async (IDaoProduct daoProduct) =>
+{
+    return await daoProduct.GetAllAsync();
+});
+
+app.MapPost("/product/add", async (Product product, IDaoProduct daoProduct) =>
+{
+    return await daoProduct.AddAsync(product);
+});
+
+app.MapPost("/product/delete", async (Product product, IDaoProduct daoProduct) =>
+{
+    return await daoProduct.DeleteAsync(product);
+});
+
+app.MapPost("/product/update", async (Product product, IDaoProduct daoProduct) =>
+{
+    return await daoProduct.UpdateAsync(product);
+});
+
+app.MapPost("/product/choose", async (Product product, IDaoProduct daoProduct) =>
+{
+    return await daoProduct.GetAsync(product);
+});
+
+
 app.Run();

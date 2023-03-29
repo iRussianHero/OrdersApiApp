@@ -8,7 +8,7 @@
         public double Cost { get; set; }
 
 
-        public List<Receipt> Receipt { get; set; }
+        //public List<Receipt> Receipt { get; set; }
 
 
         public Product()
