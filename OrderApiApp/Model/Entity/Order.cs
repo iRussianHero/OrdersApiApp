@@ -12,7 +12,7 @@ namespace OrderApiApp.Model.Entity
         public List<Receipt> Receipt { get; set; }
 
 
-        public int ClientId { get; set; }
+        //public int ClientId { get; set; }
         public Client? Client { get; set; }
 
 
@@ -20,12 +20,12 @@ namespace OrderApiApp.Model.Entity
         {
             Id = default;
             Description = "";
-            ClientId = default;
+            //ClientId = default;
         }
 
         public override string ToString()
         {
-            return $"{Id} - {Description} - {ClientId}";
+            return $"{Id} - {Description} - {Client.Id}";
         }
     }
 }
