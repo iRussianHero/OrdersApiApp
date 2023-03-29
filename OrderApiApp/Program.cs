@@ -122,4 +122,14 @@ app.MapPost("/receipt/choose", async (Receipt receipt, IDaoReceipt daoReceipt) =
 });
 
 
+app.MapPost("/receipt/getorder", async (IDaoReceipt daoReceipt, int orderId) =>
+{
+    return await daoReceipt.GetOrderAsync(orderId);
+});
+app.MapPost("/receipt/gettotalsum", async (IDaoReceipt daoReceipt, int orderId) =>
+{
+    return await daoReceipt.GetTotalSumAsync(orderId);
+});
+
+
 app.Run();

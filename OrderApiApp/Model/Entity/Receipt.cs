@@ -1,4 +1,6 @@
-﻿namespace OrderApiApp.Model.Entity
+﻿using System.Text.Json.Serialization;
+
+namespace OrderApiApp.Model.Entity
 {
     public class Receipt
     {
@@ -11,7 +13,8 @@
 
 
         public int ProductId { get; set; }
-        //public Product? Product { get; set; }
+        [JsonIgnore]
+        public Product? Product { get; set; }
 
 
         public Receipt()

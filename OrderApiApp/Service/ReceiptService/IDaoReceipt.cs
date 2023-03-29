@@ -9,5 +9,7 @@ namespace OrderApiApp.Service.ReceiptService
         Task<Receipt> UpdateAsync(Receipt receipt);
         Task<Receipt> DeleteAsync(Receipt receipt);
         Task<Receipt> GetAsync(Receipt receipt);
+        Task<List<Receipt>> GetOrderAsync(int orderId);
+        Task<Double> GetTotalSumAsync(int orderId);
     }
 }
